@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1rem 2rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            color: #f4f4f4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        
+        section {
+            padding: 2rem;
+            background-color: #fff;
+
+            margin: 1rem auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        #home img {
+            max-width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        #filters {
+            margin-bottom: 2rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .filter-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        
+        #books {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .book {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 1rem;
+            padding: 1rem;
+            width: 200px;
+            text-align: center;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .book:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .book img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .book h3 {
+            margin: 0.5rem 0;
+            font-size: 1.25rem;
+            color: #333;
+        }
+        
+        .book p {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        .book button {
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem;
+            margin: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .book button:hover {
+            background-color: #333;
+        }
+        
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        form label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        
+        form input, form textarea {
+            width: calc(100% - 1rem);
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        form button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        form button:hover {
+            background-color: #333;
+        }
+        
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        }
+        #cart {
+            padding: 2rem;
+            background-color: #fff;
+            margin: 1rem auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        #cart h2 {
+            margin-bottom: 1rem;
+        }
+
+        #cart-items {
+            margin-bottom: 1rem;
+        }
+
+        #checkout-button {
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #checkout-button:hover {
+            background-color: #333;
+        }
+        #feedback {
+            padding: 2rem;
+            background-color: #fff;
+            margin: 1rem auto;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #feedback h2 {
+            margin-bottom: 1rem;
+        }
+        #feedback label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        #feedback input, #feedback textarea {
+            width: calc(100% - 1rem);
+            padding: 0.5rem;
+            margin-top: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #feedback button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #feedback button:hover {
+            background-color: #333;
+        }
+        </style>
+</head>
+<body>
+    <header>
+        <h1>StudieSpark</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#feedback">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <h2>Welcome to StudieSpark!</h2>
+        <img src ="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (322).png">
+    </section> 
+    <section id="filters">
+        <h2>Filter Books</h2>
+        <div class="filter-group">
+            <label><input type="checkbox" class="filter-checkbox" data-type="colouring"> Colouring Books</label>
+            <label><input type="checkbox" class="filter-checkbox" data-type="sub notebooks"> Subject Notebooks</label>
+            <label><input type="checkbox" class="filter-checkbox" data-type="theme notebooks"> Theme Based Notebooks</label>
+            <label><input type="checkbox" class="filter-checkbox" data-type="diary"> Diary</label>
+        </div>
+    </section>
+    <section id="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <p id="cart-total"></p>
+        <button id="checkout-button">Proceed to Checkout</button>
+    </section>
+    <section id="payment-form" style="display:none;">
+        <h2>Payment Form</h2>
+        <form id="form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            
+            <label for="card">Card Number:</label>
+            <input type="text" id="card" required>
+            
+            <button type="submit">Pay Now</button>
+        </form>
+    </section>
+    <section id="books">
+        <h2>Books</h2>
+        <div class="book" data-type="colouring" data-name="Number Book" data-price="200">
+            <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (323).png" alt="Number Book" height="400" width="200" class="center">
+            <h3>Number Book </h3>
+            <p>Size:A4</p>
+            <p>Rs.200</p>
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="book" data-type="colouring" data-name="Alphabet Book" data-price="200">
+            <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (324).png" alt="Alphabet book" height="400" width="200" class="center">
+            <h3>Alphabet Book </h3>
+            <p>Size:A4</p>
+            <p>Rs.200</p>
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="book" data-type="colouring" data-name="Animal Book" data-price="200">
+            <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (325).png" alt=" Animal book" height="400" width="200" class="center">
+            <h3>Animal Book </h3>
+            <p>Size:A4</p>
+            <p>Rs.200</p>
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="book" data-type="colouring" data-name="Bird Book" data-price="200">
+            <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (326).png" alt=" Bird book" height="400" width="200" class="center">
+            <h3>Bird Book </h3>
+            <p>Size:A4</p>
+            <p>Rs.200</p>
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="book" data-type="sub notebooks" data-name="Physics Notebook" data-price="70">
+            <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (332).png" alt="phy notebooks" height="400" width="200" class="center">
+            <h3>Physics notebook </h3>
+            <p>Size:A4</p>
+            <p>Rs.70</p>
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="book" data-type="sub notebooks"data-name="Maths Notebook" data-price="70">
+            <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (329).png" alt=" maths notebooks" height="400" width="200" class="center">
+            <h3>Maths notebook </h3>
+            <p>Size:A4</p>
+            <p>Rs.70</p>
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="book" data-type="sub notebooks" data-name="Eng Notebook" data-price="70">
+            <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (333).png" alt=" eng notebooks" height="400" width="200" class="center">
+            <h3>Eng notebook </h3>
+            <p>Size:A4</p>
+            <p>Rs.70</p>
+            <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+        </div>
+        <div class="book" data-type="sub notebooks"data-name="Chemistry Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (330).png" alt=" che notebooks" height="400" width="200" class="center">
+                <h3>Chemistry notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="sub notebooks" data-name="Biology Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (331).png" alt="bio notebooks" height="400" width="200" class="center">
+                <h3>Biology notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (343).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (345).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (346).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (337).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (338).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (340).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (339).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="theme notebooks" data-name="Theme Based Notebook" data-price="70">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (342).png" alt="theme notebooks" height="400" width="200" class="center">
+                <h3>Notebook </h3>
+                <p>Size:A4</p>
+                <p>Rs.70</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="diary" data-name="Diary" data-price="150">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot 2024-09-13 153521.png" alt="diary" height="400" width="200" class="center">
+                <h3>Diary </h3>
+                <p>Rs.150 Page:200</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="diary" data-name="Diary" data-price="150">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot 2024-09-13 153615.png" alt="diary" height="400" width="200" class="center">
+                <h3>Diary </h3>
+                <p>Rs.150 Page:200</p>
+                <button class="add-to-cart">Add to Cart</button>
+                <button class="buy-now">Buy Now</button>
+            </div>
+            <div class="book" data-type="diary" data-name="Diary" data-price="150">
+                <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot (348).png" alt="diary" height="400" width="200" class="center">
+                <h3>Diary </h3>
+                <p>RS.150 Page:200</p>
+                <button class="add-to-cart">Add to Cart</button>
+            <button class="buy-now">Buy Now</button>
+            </div>
+    </section>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>We are passionate about books and dedicated to providing the best selection to our customers.<br>Welcome to StudieSpark, your haven for creative expression and self-expression. We're a team of art enthusiasts, designers, and stationery lovers dedicated to crafting unique, high-quality products that inspire imagination and spark joy. From beautifully designed coloring books to thoughtfully curated notebooks, journals, and paper goods, we believe that the simplest tools can be the most powerful catalysts for creativity. Our mission is to provide you with the instruments to tell your story, explore your imagination, and make your mark. Join us in our pursuit of creativity, self-expression, and the beauty of the everyday.</p>
+    <img src="c:\Users\Mahesh Kumar\Pictures\Screenshots\Screenshot 2024-09-13 171635.png">
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+    <section id="feedback">
+        <h2>Feedback Form</h2>
+        <form action="#" method="post">
+            <label for="feedback-name">Name:</label>
+            <input type="text" id="feedback-name" name="name" required>
+    
+            <label for="feedback-email">Email:</label>
+            <input type="email" id="feedback-email" name="email" required>
+    
+            <label for="feedback-message">Feedback:</label>
+            <textarea id="feedback-message" name="message" rows="4" required></textarea>
+    
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 StudieSpark. All rights reserved.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const checkboxes = document.querySelectorAll('.filter-checkbox');
+    const books = document.querySelectorAll('.book');
+    const cartItemsContainer = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    let cart = [];
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const checkedTypes = Array.from(checkboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.getAttribute('data-type'));
+
+            books.forEach(book => {
+                const bookType = book.getAttribute('data-type');
+                if (checkedTypes.length === 0 || checkedTypes.includes(bookType)) {
+                    book.style.display = 'block';
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    function updateCartDisplay() {
+        cartItemsContainer.innerHTML = '';
+        let total = 0;
+
+        cart.forEach(item => {
+            const cartItem = document.createElement('div');
+            cartItem.textContent =` ${item.name} - Rs.${item.price}`;
+            cartItemsContainer.appendChild(cartItem);
+            total += item.price;
+        });
+
+        cartTotal.textContent = `Total: Rs.${total}`;
+    }
+
+    function handleButtonClick(event) {
+        const bookElement = event.target.closest('.book');
+        if (bookElement) {
+            const itemName = bookElement.getAttribute('data-name');
+            const itemPrice = parseInt(bookElement.getAttribute('data-price'));
+            const action = event.target.className;
+
+            if (action.includes('buy-now')) {
+                // Redirect to a payment page
+                window.location.href = `payment.html?item=${encodeURIComponent(itemName)}&price=${itemPrice}`;
+            } else if (action.includes('add-to-cart')) {
+                cart.push({ name: itemName, price: itemPrice });
+                alert(`${itemName} added to cart.`);
+                updateCartDisplay();
+            }
+        }
+    }
+
+    document.querySelectorAll('.book button').forEach(button => {
+        button.addEventListener('click', handleButtonClick);
+    });
+
+    document.getElementById('checkout-button').addEventListener('click', function () {
+        if (cart.length > 0) {
+            // Show the payment form
+            document.getElementById('payment-form').style.display = 'block';
+        } else {
+            alert('Your cart is empty!');
+        }
+    });
+
+    // Handle payment form submission
+    document.getElementById('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+        alert('Payment successful! Thank you for your purchase.');
+        // Here you can add further payment processing logic
+        // Reset the cart and hide the payment form
+        cart = [];
+        updateCartDisplay();
+        document.getElementById('payment-form').style.display = 'none';
+    });
+});
+document.getElementById('feedback').querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    const name = document.getElementById('feedback-name').value;
+    const email = document.getElementById('feedback-email').value;
+    const message = document.getElementById('feedback-message').value;
+
+    // Here you can send the data to your server or process it as needed
+    alert(`Thank you for your feedback, ${name}!`);
+
+    // Optionally, reset the form
+    this.reset();
+});
+function toggleDescription(bookId) {
+    const description = document.getElementById(bookId);
+    if (description.style.display === "none") {
+        description.style.display = "block"; // Show the description
+    } else {
+        description.style.display = "none"; // Hide the description
+    }
+}
+    </script>
+</body>
+</html>
